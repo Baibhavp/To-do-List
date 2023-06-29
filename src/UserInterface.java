@@ -1,12 +1,24 @@
 import java.util.Scanner;
 public class UserInterface {
     private Scanner scanner;
+    private TodoList todoList;
 
-    public UserInterface(Scanner scanner) {
+    public UserInterface(Scanner scanner, TodoList todoList) {
         this.scanner = scanner;
+        this.todoList = todoList;
     }
 
     public void start() {
-        System.out.println("Enter your task: ");
+        while(true) {
+            System.out.print("Enter your task: ");
+            String task = scanner.nextLine();
+
+            if (task.equals("end")) {
+                break;
+            }
+            todoList.add(task);
+        }
+
+        todoList.printAll();
     }
 }
