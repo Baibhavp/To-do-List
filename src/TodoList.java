@@ -15,15 +15,27 @@ public class TodoList {
     }
 
     public void delete(int id) {
-        System.out.println("Deleted " + id);
+        if (list.containsKey(id)) {
+            System.out.println("Deleted " + id);
+        } else {
+            System.out.println("The task is not in the list.");
+        }
     }
 
     public void update(int id) {
-        System.out.println("Updated "+ id);
+        if (list.containsKey(id)) {
+            System.out.println("Updated " + id);
+        } else {
+            System.out.println("The task is not in the list.");
+        }
     }
 
     public void exit() {
         System.out.println("Exiting program .... Bye Bye!");
+    }
+
+    public boolean contains_id(int id) {
+        return list.containsKey(id);
     }
 
     public void viewAllTasks() {

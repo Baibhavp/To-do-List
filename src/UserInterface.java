@@ -30,23 +30,32 @@ public class UserInterface {
             String do_action = scanner.nextLine();
 
             if (do_action.equals("yes")) {
+
                 // Update or delete
                 System.out.print("Do you want to Update or Delete a task? (u/d): ");
                 String action = scanner.nextLine();
 
                 if (action.equals("u")) {
                     System.out.print("Enter the id of task you want to update: ");
-                    todoList.update(Integer.parseInt(scanner.nextLine()));
+                    int id = Integer.parseInt(scanner.nextLine());
+
+                    todoList.update(id);
+
+                } else if (action.equals("d")) {
+                    System.out.print("Enter the id of task you want to delete: ");
+                    int id = Integer.parseInt(scanner.nextLine());
+
+                    todoList.delete(id);
+
+                } else {
+                    System.out.println("Couldn't understand the action.");
                 }
 
-                if (action.equals("d")) {
-                    System.out.print("Enter the id of task you want to delete: ");
-                    todoList.delete(Integer.parseInt(scanner.nextLine()));
-                }
             } else if (do_action.equals("no")) {
                 // Exit program
                 todoList.exit();
                 break;
+
             } else {
                 System.out.println("Invalid response.");
             }
