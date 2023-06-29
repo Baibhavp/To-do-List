@@ -12,11 +12,14 @@ public class UserInterface {
         while(true) {
             System.out.print("Enter your task: ");
             String task = scanner.nextLine();
+            todoList.add(task);
 
-            if (task.equals("end")) {
+            System.out.print("Do you want to add another task? (yes/no): ");
+            String add_task = scanner.nextLine();
+
+            if (add_task.equals("no")) {
                 break;
             }
-            todoList.add(task);
         }
 
         todoList.printAll();
