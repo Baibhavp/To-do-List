@@ -14,7 +14,19 @@ public class TodoList {
         this.list.put(this.task_id, task);
     }
 
-    public void printAll() {
+    public void delete(int id) {
+        System.out.println("Deleted " + id);
+    }
+
+    public void update(int id) {
+        System.out.println("Updated "+ id);
+    }
+
+    public void exit() {
+        System.out.println("Exiting program .... Bye Bye!");
+    }
+
+    public void viewAllTasks() {
         for (int task_id: list.keySet()) {
             String key = String.valueOf(task_id);
             String value = list.get(task_id);
