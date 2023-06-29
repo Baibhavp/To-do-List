@@ -16,18 +16,17 @@ public class TodoList {
 
     public void delete(int id) {
         if (list.containsKey(id)) {
-            System.out.println("Deleted " + id);
+            list.remove(id);
+            System.out.println("Task deleted successfully.");
+
         } else {
-            System.out.println("The task is not in the list.");
+            System.out.println("Task ID not found in the list.");
         }
     }
 
-    public void update(int id) {
-        if (list.containsKey(id)) {
-            System.out.println("Updated " + id);
-        } else {
-            System.out.println("The task is not in the list.");
-        }
+    public void update(int id, String new_task) {
+        list.put(id, new_task);
+        System.out.println("Task updated successfully.");
     }
 
     public void exit() {

@@ -35,24 +35,34 @@ public class UserInterface {
                 System.out.print("Do you want to Update or Delete a task? (u/d): ");
                 String action = scanner.nextLine();
 
+                // Update
                 if (action.equals("u")) {
                     System.out.print("Enter the id of task you want to update: ");
                     int id = Integer.parseInt(scanner.nextLine());
 
-                    todoList.update(id);
+                    if (todoList.contains_id(id)) {
+                        System.out.print("Enter new description for task: ");
+                        String new_task = scanner.nextLine();
 
+                        todoList.update(id, new_task);
+                    } else {
+                        System.out.println("Task ID not found in the list.");
+                    }
+
+                // Delete
                 } else if (action.equals("d")) {
                     System.out.print("Enter the id of task you want to delete: ");
                     int id = Integer.parseInt(scanner.nextLine());
 
                     todoList.delete(id);
 
+                // Invalid
                 } else {
                     System.out.println("Couldn't understand the action.");
                 }
 
+            // Exit program
             } else if (do_action.equals("no")) {
-                // Exit program
                 todoList.exit();
                 break;
 
