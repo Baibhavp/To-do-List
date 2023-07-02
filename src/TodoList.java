@@ -1,3 +1,4 @@
+import java.sql.*;
 import java.util.HashMap;
 
 public class TodoList {
@@ -9,9 +10,32 @@ public class TodoList {
         this.task_id = 0;
     }
 
+    public void Connect(String sql) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "hello123");
+
+            Statement statement = connection.createStatement();
+
+            int rows = statement.executeUpdate(sql);
+
+            if (rows < 0) {
+                System.out.println("A new row has been inserted successfully.");
+            }
+
+//            ResultSet resultSet = statement.executeQuery("select * from list;");
+
+//            while (resultSet.next()) {
+//                System.out.println(resultSet.getString("Task"));
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void add(String task) {
         this.task_id++;
-        this.list.put(this.task_id, task);
+        String sql = "insert into list values("+this.task_id+", '"+task+"')";
+        Connect(sql);
     }
 
     public void delete(int id) {
