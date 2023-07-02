@@ -13,6 +13,7 @@ public class UserInterface {
             System.out.print("Enter your task: ");
             String task = scanner.nextLine();
             todoList.add(task);
+            todoList.viewAllTasks();
             break;
 
 //            System.out.print("Do you want to add another task? (yes/no): ");

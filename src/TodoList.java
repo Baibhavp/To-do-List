@@ -10,18 +10,24 @@ public class TodoList {
         this.task_id = 0;
     }
 
-    public void Connect(String sql) {
+    public void Connect(int command, String sql) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "hello123");
 
             Statement statement = connection.createStatement();
 
-            int rows = statement.executeUpdate(sql);
+            // command = 1 - Display
+            if (command == 1) {
+                ResultSet resultSet = statement.executeQuery(sql);
 
-            if (rows < 0) {
-                System.out.println("A new row has been inserted successfully.");
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString("Task"));
             }
 
+            // command = 2 - Insert, Update, Delete
+            } else if(command == 2) {
+                statement.executeUpdate(sql);
+            }
 //            ResultSet resultSet = statement.executeQuery("select * from list;");
 
 //            while (resultSet.next()) {
@@ -34,8 +40,8 @@ public class TodoList {
 
     public void add(String task) {
         this.task_id++;
-        String sql = "insert into list values("+this.task_id+", '"+task+"')";
-        Connect(sql);
+        String sql = "insert into list(Task) values('"+task+"')";
+        Connect(2, sql);
     }
 
     public void delete(int id) {
@@ -62,10 +68,7 @@ public class TodoList {
     }
 
     public void viewAllTasks() {
-        for (int task_id: list.keySet()) {
-            String key = String.valueOf(task_id);
-            String value = list.get(task_id);
-            System.out.println(key + " " + value);
-        }
+        String sql = "select * from list;";
+        Connect(1, sql);
     }
 }
