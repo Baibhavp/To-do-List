@@ -9,24 +9,30 @@ public class UserInterface {
     }
 
     public void start() {
-        while(true) {
-            System.out.print("Enter your task: ");
-            String task = scanner.nextLine();
-            todoList.add(task);
-            todoList.viewAllTasks();
+        while (true) {
+            System.out.print("Enter the id of task you want to delete: ");
+            int id = Integer.parseInt(scanner.nextLine());
+
+            todoList.delete(id);
             break;
 
+//
+//            System.out.print("Enter your task: ");
+//            String task = scanner.nextLine();
+//            todoList.add(task);
+//
 //            System.out.print("Do you want to add another task? (yes/no): ");
 //            String add_task = scanner.nextLine();
 //
 //            if (add_task.equals("no")) {
 //                break;
 //            }
-        }
-
-        // displays tasks on the list
-//        todoList.viewAllTasks();
+//        }
 //
+//        // displays tasks on the list
+//        todoList.viewAllTasks();
+
+
 //        while (true){
 //            System.out.print("Do you want to perform any actions on the tasks? (yes/no): ");
 //            String do_action = scanner.nextLine();
@@ -57,6 +63,7 @@ public class UserInterface {
 //                    int id = Integer.parseInt(scanner.nextLine());
 //
 //                    todoList.delete(id);
+//                    break;
 //
 //                // Invalid
 //                } else {
@@ -72,5 +79,6 @@ public class UserInterface {
 //                System.out.println("Invalid response.");
 //            }
 //        }
+        }
     }
 }

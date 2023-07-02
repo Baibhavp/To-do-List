@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TodoList {
@@ -11,6 +12,7 @@ public class TodoList {
     }
 
     public void Connect(int command, String sql) {
+        ArrayList<Integer> ids = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "hello123");
 
@@ -24,15 +26,29 @@ public class TodoList {
                 System.out.println(resultSet.getString("Task"));
             }
 
-            // command = 2 - Insert, Update, Delete
+            // command = 2 - Insert, Update
             } else if(command == 2) {
                 statement.executeUpdate(sql);
-            }
-//            ResultSet resultSet = statement.executeQuery("select * from list;");
 
-//            while (resultSet.next()) {
-//                System.out.println(resultSet.getString("Task"));
-//            }
+            // command = 3 - Delete
+            } else if(command == 3) {
+                ResultSet resultSet = statement.executeQuery("select task_id from list;");
+
+                while (resultSet.next()) {
+                    ids.add(resultSet.getInt("Task_id"));
+                }
+
+                // Gets task_id to be deleted
+                int id_to_delete = Integer.parseInt(sql.replaceFirst(".*?(\\d+).*", "$1"));
+
+                if (ids.contains(id_to_delete)) {
+                    statement.executeUpdate(sql);
+                    System.out.println("Task deleted successfully.");
+                } else {
+                    System.out.println("Task ID could not be found.");
+                }
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,13 +61,8 @@ public class TodoList {
     }
 
     public void delete(int id) {
-        if (list.containsKey(id)) {
-            list.remove(id);
-            System.out.println("Task deleted successfully.");
-
-        } else {
-            System.out.println("Task ID not found in the list.");
-        }
+        String sql = "delete from list where Task_id = "+id+";";
+        Connect(3, sql);
     }
 
     public void update(int id, String new_task) {
