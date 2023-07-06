@@ -21,10 +21,19 @@ public class TodoList {
             if (command == 1) {
                 ResultSet resultSet = statement.executeQuery(sql);
 
-            System.out.print("Task_id     Task\n");
+                // shows table
+                System.out.println("Task_id    Task                          Stage     Status");
 
-            while (resultSet.next()) {
-                System.out.println(resultSet.getInt("Task_id") + "         " + resultSet.getString("Task"));
+                // Iterate through the data in the result set and display it.
+                while (resultSet.next()) {
+                    int task_id = resultSet.getInt("Task_id");
+                    String task = resultSet.getString("Task");
+                    String stage = resultSet.getString("Stage");
+                    String status = resultSet.getString("Status");
+
+                    System.out.format("%-11d%-30s%-10s%-10s", task_id, task, stage, status);
+                    System.out.println();
+
             }
 
             // command = 2 - Insert
@@ -70,28 +79,36 @@ public class TodoList {
         return this.ids.contains(id_to_edit);
     }
 
+    public void viewAllTasks() {
+
+        String sql = "select * from list where Status != 'inactive';";
+        connect(1, sql);
+
+    }
+
     public void add(String task) {
-        String sql = "insert into list(Task) values('"+task+"')";
+
+        String sql = "insert into list(Task, Stage, Status) values('"+task+"', 'pending', 'active')";
         connect(2, sql);
+
     }
 
     public void delete(int id) {
-        String sql = "delete from list where Task_id = "+id+";";
+
+        String sql = "update list set stage = 'complete', status = 'inactive' where Task_id = "+id+";";
         connect(3, sql);
+
     }
 
     public void update(int id, String new_task) {
-        String sql = "update list set task = '"+new_task+"' where task_id = "+id;
+
+        String sql = "update list set task = '"+new_task+"', stage = 'ongoing' where task_id = "+id;
         connect(4, sql);
+
     }
 
     public void exit() {
         System.out.println("\nExiting program .... Bye Bye!");
     }
 
-
-    public void viewAllTasks() {
-        String sql = "select * from list;";
-        connect(1, sql);
-    }
 }
