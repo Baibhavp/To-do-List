@@ -22,16 +22,15 @@ public class TodoList {
                 ResultSet resultSet = statement.executeQuery(sql);
 
                 // shows table
-                System.out.println("Task_id    Task                          Stage     Status");
+                System.out.println("Task_id    Task                          Stage");
 
                 // Iterate through the data in the result set and display it.
                 while (resultSet.next()) {
                     int task_id = resultSet.getInt("Task_id");
                     String task = resultSet.getString("Task");
                     String stage = resultSet.getString("Stage");
-                    String status = resultSet.getString("Status");
 
-                    System.out.format("%-11d%-30s%-10s%-10s", task_id, task, stage, status);
+                    System.out.format("%-11d%-30s%-10s", task_id, task, stage);
                     System.out.println();
 
             }
@@ -95,14 +94,21 @@ public class TodoList {
 
     public void delete(int id) {
 
-        String sql = "update list set stage = 'complete', status = 'inactive' where Task_id = "+id+";";
+        String sql = "update list set status = 'inactive' where Task_id = "+id+";";
         connect(3, sql);
 
     }
 
     public void update(int id, String new_task) {
 
-        String sql = "update list set task = '"+new_task+"', stage = 'ongoing' where task_id = "+id;
+        String sql = "update list set task = '"+new_task+"' where task_id = "+id;
+        connect(4, sql);
+
+    }
+
+    public void update(int id, String new_task, String stage) {
+
+        String sql = "update list set task = '"+new_task+"', stage = '"+stage+"' where task_id = "+id;
         connect(4, sql);
 
     }
