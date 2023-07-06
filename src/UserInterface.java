@@ -34,7 +34,7 @@ public class UserInterface {
 
                     todoList.add(task);
 
-                    while(true) {
+                    while (true) {
 
                         System.out.print("Do you want to add another task? (y/n): ");
                         String addTask = scanner.nextLine();
@@ -58,7 +58,7 @@ public class UserInterface {
 
                 }
 
-            // Edit list
+                // Edit list
             } else if (command == 2) {
 
                 while (true) {
@@ -75,7 +75,7 @@ public class UserInterface {
                         // Update
                         if (action.equals("u")) {
 
-                            while(true) {
+                            while (true) {
 
                                 System.out.print("Enter the id of task you want to update: ");
                                 int id = Integer.parseInt(scanner.nextLine());
@@ -106,7 +106,7 @@ public class UserInterface {
 
                                     } else {
 
-                                        System.out.println("Invalid input");
+                                        System.out.println("Invalid input!");
                                     }
 
                                 } else if (updateCommand == 3) {
@@ -124,12 +124,12 @@ public class UserInterface {
 
                                     } else {
 
-                                        System.out.println("Invalid input");
+                                        System.out.println("Invalid input!");
                                     }
 
                                 } else {
 
-                                    System.out.println("Invalid input.");
+                                    System.out.println("Invalid input!");
                                 }
                             }
                         }
@@ -144,7 +144,7 @@ public class UserInterface {
 
                             // Invalid
                         } else {
-                            System.out.println("Invalid input");
+                            System.out.println("Invalid input!");
                         }
 
                     } else if (doAction.equals("n")) {
@@ -155,16 +155,16 @@ public class UserInterface {
                     }
                 }
 
-            // View list
+                // View list
             } else if (command == 3) {
                 todoList.viewAllTasks();
 
-            // Exit program
+                // Exit program
             } else if (command == 4) {
                 todoList.exit();
                 break;
 
-            // Error message
+                // Error message
             } else {
                 System.out.println("Invalid input!");
             }

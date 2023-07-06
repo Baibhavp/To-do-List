@@ -4,10 +4,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-        TodoList todoList = new TodoList();
-        UserInterface userInterface = new UserInterface(scanner, todoList);
+        try {
 
-        userInterface.start();
+            Scanner scanner = new Scanner(System.in);
+            TodoList todoList = new TodoList();
+            UserInterface userInterface = new UserInterface(scanner, todoList);
+
+            userInterface.start();
+
+        } catch (Exception e) {
+
+            System.out.println("Sorry, something went wrong. Please run the program again.");
+    }
     }
 }
