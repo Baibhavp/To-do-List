@@ -1,17 +1,18 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class TodoList {
+
     private ArrayList<Integer> ids;
 
     public TodoList() {
         this.ids = new ArrayList<>();
     }
 
-    public void Connect(int command, String sql) {
-        ArrayList<Integer> ids = new ArrayList<>();
+    public void connect(int command, String sql) {
+
         try {
+
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/todolist", "root", "hello123");
 
             Statement statement = connection.createStatement();
@@ -48,12 +49,14 @@ public class TodoList {
                     System.out.println("Task ID does not exist.");
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public boolean contains_id(Statement statement, String sql) throws SQLException {
+
         // Stores task ids present in the database
         ResultSet resultSet = statement.executeQuery("select task_id from list;");
 
@@ -69,17 +72,17 @@ public class TodoList {
 
     public void add(String task) {
         String sql = "insert into list(Task) values('"+task+"')";
-        Connect(2, sql);
+        connect(2, sql);
     }
 
     public void delete(int id) {
         String sql = "delete from list where Task_id = "+id+";";
-        Connect(3, sql);
+        connect(3, sql);
     }
 
     public void update(int id, String new_task) {
         String sql = "update list set task = '"+new_task+"' where task_id = "+id;
-        Connect(4, sql);
+        connect(4, sql);
     }
 
     public void exit() {
@@ -89,6 +92,6 @@ public class TodoList {
 
     public void viewAllTasks() {
         String sql = "select * from list;";
-        Connect(1, sql);
+        connect(1, sql);
     }
 }
