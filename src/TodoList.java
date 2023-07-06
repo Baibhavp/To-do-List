@@ -72,10 +72,10 @@ public class TodoList {
             this.ids.add(resultSet.getInt("Task_id"));
         }
 
-        int id_to_edit = Integer.parseInt(sql.replaceFirst(".*?(\\d+).*", "$1"));
+        int idToEdit = Integer.parseInt(sql.replaceFirst(".*?(\\d+).*", "$1"));
 
         // checks if task id is present in the database
-        return this.ids.contains(id_to_edit);
+        return this.ids.contains(idToEdit);
     }
 
     public void viewAllTasks() {
@@ -99,16 +99,16 @@ public class TodoList {
 
     }
 
-    public void update(int id, String new_task) {
+    public void update(int id, String newTask) {
 
-        String sql = "update list set task = '"+new_task+"' where task_id = "+id;
+        String sql = "update list set task = '"+newTask+"' where task_id = "+id;
         connect(4, sql);
 
     }
 
-    public void update(int id, String new_task, String stage) {
+    public void update(int id, String newTask, String stage) {
 
-        String sql = "update list set task = '"+new_task+"', stage = '"+stage+"' where task_id = "+id;
+        String sql = "update list set task = '"+newTask+"', stage = '"+stage+"' where task_id = "+id;
         connect(4, sql);
 
     }

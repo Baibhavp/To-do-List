@@ -37,14 +37,13 @@ public class UserInterface {
                     while(true) {
 
                         System.out.print("Do you want to add another task? (y/n): ");
-                        String add_task = scanner.nextLine();
+                        String addTask = scanner.nextLine();
 
-                        if (add_task.equals("y")) {
+                        if (addTask.equals("y")) {
                             addNew = true;
                             break;
 
-                        } else if (add_task.equals("n")) {
-                            // TODO: 7/6/2023 prints invalid input
+                        } else if (addTask.equals("n")) {
                             break;
 
                         } else {
@@ -65,12 +64,12 @@ public class UserInterface {
                 while (true) {
 
                     System.out.print("Do you want to perform any actions on the tasks? (y/n): ");
-                    String do_action = scanner.nextLine();
+                    String doAction = scanner.nextLine();
 
-                    if (do_action.equals("y")) {
+                    if (doAction.equals("y")) {
 
                         // Update or delete
-                        System.out.print("Do you want to Update or Delete a task? (u/d): ");
+                        System.out.print("Do you want to update or delete a task? (u/d): ");
                         String action = scanner.nextLine();
 
                         // Update
@@ -81,8 +80,10 @@ public class UserInterface {
                                 System.out.print("Enter the id of task you want to update: ");
                                 int id = Integer.parseInt(scanner.nextLine());
 
+                                // TODO: 7/6/2023 give user option to change task description or stage or both
+
                                 System.out.print("Enter new task description: ");
-                                String new_task = scanner.nextLine();
+                                String newTask = scanner.nextLine();
 
                                 System.out.print("Do you want to change the stage of task? (y/n): ");
                                 String editStage = scanner.nextLine();
@@ -90,11 +91,11 @@ public class UserInterface {
                                 if (editStage.equals("y")) {
 
                                     System.out.print("Enter task stage (pending/ongoing/complete): ");
-                                    String task_stage = scanner.nextLine();
+                                    String taskStage = scanner.nextLine();
 
-                                    if (task_stage.equals("pending") || task_stage.equals("ongoing") || task_stage.equals("complete")) {
+                                    if (taskStage.equals("pending") || taskStage.equals("ongoing") || taskStage.equals("complete")) {
 
-                                        todoList.update(id, new_task, task_stage);
+                                        todoList.update(id, newTask, taskStage);
                                         break;
 
                                     } else {
@@ -104,7 +105,7 @@ public class UserInterface {
 
                                 } else if (editStage.equals("n")) {
 
-                                    todoList.update(id, new_task);
+                                    todoList.update(id, newTask);
                                     break;
 
                                 } else {
@@ -127,12 +128,11 @@ public class UserInterface {
                             System.out.println("Invalid input");
                         }
 
-                    } else if (do_action.equals("n")) {
-                        // TODO: 7/6/2023 breaks out of loop and prints invalid input
+                    } else if (doAction.equals("n")) {
                         break;
 
                     } else {
-                        System.out.println("Invalid input");
+                        System.out.println("Invalid input!");
                     }
                 }
 
@@ -147,7 +147,7 @@ public class UserInterface {
 
             // Error message
             } else {
-                System.out.println("Invalid input");
+                System.out.println("Invalid input!");
             }
         }
     }
