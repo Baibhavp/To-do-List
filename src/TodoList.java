@@ -99,19 +99,25 @@ public class TodoList {
 
     }
 
-    public void update(int id, String newTask) {
+    public void updateDescription(int id, String newTask) {
 
         String sql = "update list set task = '"+newTask+"' where task_id = "+id;
         connect(4, sql);
 
     }
 
-    public void update(int id, String newTask, String stage) {
+    public void updateDescription(int id, String newTask, String stage) {
 
-        String sql = "update list set task = '"+newTask+"', stage = '"+stage+"' where task_id = "+id;
+        String sql = "update list set task = '" + newTask + "', stage = '" + stage + "' where task_id = " + id;
         connect(4, sql);
-
     }
+
+    public void updateStage(int id, String stage) {
+
+        String sql = "update list set stage = '" + stage + "' where task_id = " + id;
+        connect(4, sql);
+    }
+
 
     public void exit() {
         System.out.println("\nExiting program .... Bye Bye!");

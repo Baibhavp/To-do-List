@@ -82,20 +82,26 @@ public class UserInterface {
 
                                 // TODO: 7/6/2023 give user option to change task description or stage or both
 
-                                System.out.print("Enter new task description: ");
-                                String newTask = scanner.nextLine();
+                                System.out.print("Change task description, or stage, or both? (1/2/3): ");
+                                int updateCommand = Integer.parseInt(scanner.nextLine());
 
-                                System.out.print("Do you want to change the stage of task? (y/n): ");
-                                String editStage = scanner.nextLine();
+                                // Change description
+                                if (updateCommand == 1) {
 
-                                if (editStage.equals("y")) {
+                                    System.out.print("Enter new task description: ");
+                                    String newTask = scanner.nextLine();
+
+                                    todoList.updateDescription(id, newTask);
+                                    break;
+
+                                } else if (updateCommand == 2) {
 
                                     System.out.print("Enter task stage (pending/ongoing/complete): ");
                                     String taskStage = scanner.nextLine();
 
                                     if (taskStage.equals("pending") || taskStage.equals("ongoing") || taskStage.equals("complete")) {
 
-                                        todoList.update(id, newTask, taskStage);
+                                        todoList.updateStage(id, taskStage);
                                         break;
 
                                     } else {
@@ -103,10 +109,23 @@ public class UserInterface {
                                         System.out.println("Invalid input");
                                     }
 
-                                } else if (editStage.equals("n")) {
+                                } else if (updateCommand == 3) {
 
-                                    todoList.update(id, newTask);
-                                    break;
+                                    System.out.print("Enter new task description: ");
+                                    String newTask = scanner.nextLine();
+
+                                    System.out.print("Enter task stage (pending/ongoing/complete): ");
+                                    String taskStage = scanner.nextLine();
+
+                                    if (taskStage.equals("pending") || taskStage.equals("ongoing") || taskStage.equals("complete")) {
+
+                                        todoList.updateDescription(id, newTask, taskStage);
+                                        break;
+
+                                    } else {
+
+                                        System.out.println("Invalid input");
+                                    }
 
                                 } else {
 
