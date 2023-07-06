@@ -1,5 +1,7 @@
 import java.util.Scanner;
+
 public class UserInterface {
+
     private Scanner scanner;
     private TodoList todoList;
 
@@ -9,18 +11,38 @@ public class UserInterface {
     }
 
     public void start() {
+
         while (true) {
+
+            boolean addNew = false;
 
             System.out.print("Enter your task: ");
             String task = scanner.nextLine();
+
             todoList.add(task);
 
-            System.out.print("Do you want to add another task? (yes/no): ");
-            String add_task = scanner.nextLine();
+            while(true) {
 
-            if (add_task.equals("no")) {
+                System.out.print("Do you want to add another task? (y/n): ");
+                String add_task = scanner.nextLine();
+
+                if (add_task.equals("y")) {
+                    addNew = true;
+                    break;
+
+                } else if (add_task.equals("n")) {
+                    break;
+
+                } else {
+                    System.out.println("Invalid input.");
+                }
+            }
+
+            // exits loop if user doesn't want to add new task
+            if (!addNew) {
                 break;
             }
+
         }
 
         // displays tasks on the list
@@ -28,10 +50,11 @@ public class UserInterface {
 
 
         while (true){
-            System.out.print("Do you want to perform any actions on the tasks? (yes/no): ");
+
+            System.out.print("Do you want to perform any actions on the tasks? (y/n): ");
             String do_action = scanner.nextLine();
 
-            if (do_action.equals("yes")) {
+            if (do_action.equals("y")) {
 
                 // Update or delete
                 System.out.print("Do you want to Update or Delete a task? (u/d): ");
@@ -47,20 +70,20 @@ public class UserInterface {
 
                     todoList.update(id, new_task);
 
-                // Delete
+                    // Delete
                 } else if (action.equals("d")) {
                     System.out.print("Enter the id of task you want to delete: ");
                     int id = Integer.parseInt(scanner.nextLine());
 
                     todoList.delete(id);
 
-                // Invalid
+                    // Invalid
                 } else {
                     System.out.println("Couldn't understand the action.");
                 }
 
-            // Exit program
-            } else if (do_action.equals("no")) {
+                // Exit program
+            } else if (do_action.equals("n")) {
                 todoList.exit();
                 break;
 
@@ -72,6 +95,5 @@ public class UserInterface {
         System.out.println("The list : ");
         todoList.viewAllTasks();
 
-        }
     }
-
+}
