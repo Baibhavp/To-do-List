@@ -55,10 +55,9 @@ public class UserInterface {
                     if (!addNew) {
                         break;
                     }
-
                 }
 
-                // Edit list
+            // Edit list
             } else if (command == 2) {
 
                 while (true) {
@@ -79,8 +78,6 @@ public class UserInterface {
 
                                 System.out.print("Enter the id of task you want to update: ");
                                 int id = Integer.parseInt(scanner.nextLine());
-
-                                // TODO: 7/6/2023 give user option to change task description or stage or both
 
                                 System.out.print("Change task description, or stage, or both? (1/2/3): ");
                                 int updateCommand = Integer.parseInt(scanner.nextLine());
@@ -147,6 +144,7 @@ public class UserInterface {
                             System.out.println("Invalid input!");
                         }
 
+                    // No edit to list
                     } else if (doAction.equals("n")) {
                         break;
 
@@ -155,16 +153,16 @@ public class UserInterface {
                     }
                 }
 
-                // View list
+            // View list
             } else if (command == 3) {
                 todoList.viewAllTasks();
 
-                // Exit program
+            // Exit program
             } else if (command == 4) {
                 todoList.exit();
                 break;
 
-                // Error message
+            // Error message
             } else {
                 System.out.println("Invalid input!");
             }

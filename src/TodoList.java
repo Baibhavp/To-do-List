@@ -19,6 +19,7 @@ public class TodoList {
 
             // command = 1 - Display
             if (command == 1) {
+
                 ResultSet resultSet = statement.executeQuery(sql);
 
                 // shows table
@@ -37,22 +38,27 @@ public class TodoList {
 
             // command = 2 - Insert
             } else if(command == 2) {
+
                 statement.executeUpdate(sql);
 
             // command = 3 - Delete
             } else if(command == 3) {
+
                 if (contains_id(statement, sql)) {
                     statement.executeUpdate(sql);
                     System.out.println("Task deleted successfully.");
+
                 } else {
                     System.out.println("Task ID could not be found.");
                 }
 
             // command = 4 - Update
             } else if (command == 4) {
+
                 if (contains_id(statement, sql)) {
                     statement.executeUpdate(sql);
                     System.out.println("Task updated successfully.");
+
                 } else {
                     System.out.println("Task ID does not exist.");
                 }
@@ -68,6 +74,7 @@ public class TodoList {
         // Stores task ids present in the database
         ResultSet resultSet = statement.executeQuery("select task_id from list;");
 
+        // adds all task ids to arraylist
         while (resultSet.next()) {
             this.ids.add(resultSet.getInt("Task_id"));
         }
